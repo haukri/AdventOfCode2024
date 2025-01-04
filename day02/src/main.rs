@@ -66,10 +66,12 @@ fn test_are_reports_safe() -> Result<(), Box<dyn std::error::Error>> {
     let file_path = "test_input.txt";
     let mut temp_file = File::create(file_path)?;
 
-    let test_data = "7 6 4 2 1\n1 2 7 8 9\n9 7d 6 2 1\n1 3 2 4 5\n8 6 4 4 1\n1 3 6 7 9";
+    let test_data = "7 6 4 2 1\n1 2 7 8 9\n9 7 6 2 1\n1 3 2 4 5\n8 6 4 4 1\n1 3 6 7 9";
     temp_file.write_all(test_data.as_bytes())?;
 
     let result = count_safe_reports(file_path);
+
+    fs::remove_file(file_path)?;
 
     match result {
         Ok(safe_report_count) => {
@@ -79,8 +81,6 @@ fn test_are_reports_safe() -> Result<(), Box<dyn std::error::Error>> {
             panic!("Test failed with error: {e}");
         }
     }
-
-    fs::remove_file(file_path)?;
 
     Ok(())
 }
