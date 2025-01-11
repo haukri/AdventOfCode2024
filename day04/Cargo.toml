@@ -1,0 +1,9 @@
+[package]
+name = "day04"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+utilities = { path = "../utilities" }
+anyhow = "1.0.95"
+regex = "1.11.1"
