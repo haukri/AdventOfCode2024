@@ -46,9 +46,9 @@ fn get_vertical_lines(matrix: &Vec<Vec<char>>) -> Vec<Vec<char>> {
     let num_columns = matrix[0].len();
     let mut result: Vec<Vec<char>> = Vec::new();
 
-    for i in 0..num_rows {
+    for i in 0..num_columns {
         let mut line: Vec<char> = Vec::new();
-        for j in 0..num_columns {
+        for j in 0..num_rows {
             line.push(matrix[j][i]);
         }
         result.push(line);
@@ -125,8 +125,8 @@ fn count_word_occurence_in_matrix(matrix: Vec<Vec<char>>, word: &str) -> i32 {
 fn count_word_occurrence_in_vector(line: &Vec<char>, word: &str) -> i32 {
     let result : i32 = line
         .windows(word.len())
-        .map(|window| if window.iter().collect::<String>() == word || window.iter().rev().collect::<String>() == word {1} else {0})
-        .sum();
+        .filter(|window| window.iter().copied().eq(word.chars()) || window.iter().rev().copied().eq(word.chars()))    
+        .count() as i32;
 
     return result;
 }
